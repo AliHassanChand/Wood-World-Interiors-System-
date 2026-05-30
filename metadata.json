@@ -1,0 +1,6 @@
+{
+  "name": "Wood World Enterprise ERP",
+  "description": "An elite enterprise ERP platform for Wood World Enterprise featuring an AI Business Copilot, real-time executive command center, automated inventory alerts, multi-branch operations, and custom reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
