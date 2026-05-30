@@ -38,7 +38,9 @@ import {
   Mail,
   MessageSquare,
   Menu,
-  X
+  X,
+  Sun,
+  Moon
 } from "lucide-react";
 
 // Types & Seed Data
@@ -82,6 +84,19 @@ export default function App() {
   useEffect(() => {
     setMenuOpen(false);
   }, [activeTab, activeBranch]);
+
+  // Dark / Light Theme state & application (Executive Theme Engine)
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "light") {
+      root.classList.add("light-theme");
+      root.style.backgroundColor = "#FAF8F5";
+    } else {
+      root.classList.remove("light-theme");
+      root.style.backgroundColor = "#0F0F0F";
+    }
+  }, [theme]);
   
   // Folders collapsible states for Grouped Navigation sidebar
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({
@@ -572,6 +587,24 @@ export default function App() {
             <span>Showroom:</span>
             <strong className="text-[#C5A059] uppercase">{activeBranch.split(" ")[0]}</strong>
           </span>
+
+          {/* Dark / Light Luxury theme toggler */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 bg-[#0F0F0F] hover:bg-white/5 text-[#C5A059] border border-white/5 hover:border-white/10 rounded-lg transition-all flex items-center justify-center cursor-pointer shadow-sm group"
+            id="theme-toggler-btn"
+            title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Theme`}
+            aria-label="Toggle Theme"
+          >
+            {theme === "dark" ? (
+              <Sun className="w-4 h-4 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300 shrink-0" />
+            ) : (
+              <Moon className="w-4 h-4 text-[#C5A059] group-hover:-rotate-12 transition-transform duration-300 shrink-0" />
+            )}
+            <span className="text-xs font-mono uppercase tracking-wider ml-1.5 hidden sm:block">
+              {theme === "dark" ? "Light Mode" : "Dark Mode"}
+            </span>
+          </button>
 
           <button
             onClick={() => setCopilotOpen(!copilotOpen)}
